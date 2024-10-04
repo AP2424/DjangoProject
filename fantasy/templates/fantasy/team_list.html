@@ -1,0 +1,37 @@
+{% extends 'blog/base.html' %}
+{% block text %}
+<title>24 Fantasy</title>
+<h1 class="center-title mb-5">Fantasy teams rating ({{ page_obj.paginator.count }})</h1>
+<div class="fantasy">
+    <div class="leaderboard">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Team</th>
+            <th>Owner</th>
+            <th>Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for team in teams %}
+            <tr class="userteam-stats">
+                {% if team.rank == 1 %}
+                  <td class="team-place first-place">{{ team.rank }}</td>
+                {% elif team.rank == 2 %}
+                  <td class="team-place second-place">{{ team.rank }}</td>
+                {% elif team.rank == 3 %}
+                  <td class="team-place third-place">{{ team.rank }}</td>
+                {% else %}
+                  <td class="team-place">{{ team.rank }}</td>
+                {% endif %}
+                <td><a href="{% url 'userteam' team.name %}">{{ team.name }}</a></td>
+                <td><a href="#"> {{ team.owner }}</a></td>
+                <td class="table-link"> {{ team.points }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+</div>
+{% endblock text %}

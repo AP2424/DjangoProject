@@ -1,0 +1,42 @@
+{% extends 'blog/base.html' %}
+{% block text %}
+<title>Daily</title>
+<div class="fantasy">
+    <div class="flex">
+  <div class="poll">
+      {% for poll in polls1 %}
+  <h2 style="width: 500px; margin-top: 50px;">{{ poll.title }}</h2>
+    <form method="post">
+    {% csrf_token %}
+    <ul class="poll-list" title="{{ poll.title }}">
+        {% for choice in poll.choices.all %}
+        <li class="poll-list-item"
+            onclick="myfunc('item-{{ poll.id }}-{{ choice.choiceid }}')">{{ choice.text }}
+            <img class="poll-image" src="{{ choice.image_url }}"></li>
+        {% endfor %}
+    </ul>
+        <button type="submit" class="yes-button"
+                style="margin-top: 30px; margin-left: 40px; ">Vote</button>
+    </form>
+  {% endfor %}
+  </div>
+    <div class="poll">
+      {% for poll in polls2 %}
+  <h2 style="width: 500px; margin-top: 50px;">{{ poll.title }}</h2>
+    <form method="post">
+    {% csrf_token %}
+    <ul class="poll-list" title="{{ poll.title }}">
+        {% for choice in poll.choices.all %}
+        <li class="poll-list-item"
+            onclick="myfunc('item-{{ poll.id }}-{{ choice.choiceid }}')">{{ choice.text }}
+            <img class="poll-image" src="{{ choice.image_url }}"></li>
+        {% endfor %}
+    </ul>
+        <button type="submit" class="yes-button"
+                style="margin-top: 30px; margin-left: 40px; ">Vote</button>
+    </form>
+  {% endfor %}
+  </div>
+    </div>
+</div>
+{% endblock text %}

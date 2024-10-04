@@ -1,0 +1,37 @@
+{% extends 'blog/base.html' %}
+{% block text %}
+<title>My team</title>
+<div class="fantasy">
+<div class="content-section">
+    <div class="media-body">
+        <h2 class="account-heading">{{ team.name }}</h2>
+        <h3 class="text-secondary">{{ team.description }}</h3>
+        <p class="text-secondary">Owner: {{ team.owner }}</p>
+        <table class="table table-sm table-bordered">
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>Age</th>
+            <th>Club</th>
+            <th>Position</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for player in team.players.all %}
+            <tr class="squad-player">
+                <td><a class="table-link" href="{% url 'player-detail' player.id %}">{{ player.name }}</a></td>
+                <td>{{ player.age }}</td>
+                <td><a class="table-link" href="{% url 'club-players' player.club.name %}">{{ player.club }}</a></td>
+                <td>{{ player.position }}</td>
+                <td>€{{ player.value }} m</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+    <h1 class="center-title">{{ team.points }} fantasy points</h1>
+    <h1 class="center-title"><b>Global Rank #{{ team.rank }}</b></h1>
+    </div>
+</div>
+</div>
+{% endblock text %}

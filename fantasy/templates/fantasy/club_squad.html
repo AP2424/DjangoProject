@@ -1,0 +1,107 @@
+{% extends 'blog/base.html' %}
+{% block text %}
+<title>{{ club }}</title>
+<div class="fantasy">
+<h1 class="basic-title">{{ club.name }}<img class="club-title-image" src="{{ club.logo_url }}"></h1>
+<div class="flex-button">
+  <button class="club-button active-button"><a href="">Squad</a></button>
+  <button class="club-button inactive-button"><a href="{% url 'club-matches' club.name %}">Results</a></button>
+  <button class="club-button inactive-button first-button"><a href="{% url 'club-stats' club.name %}">Stats</a></button>
+</div>
+    <h2><b>Goalkeepers</b></h2>
+    <table class="detailed-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Player</th>
+            <th>Age</th>
+            <th>Position</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for player in goalkeepers %}
+            <tr class="table-row">
+                <td class="small-td">{{ player.number }}</td>
+                <td><a href="{% url 'player-detail' player.id %}">{{ player.name }}</a></td>
+                <td>{{ player.age }}</td>
+                <td>{{ player.position }}</td>
+                <td>€{{ player.value }} m</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <h2><b>Defenders</b></h2>
+    <table class="detailed-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Player</th>
+            <th>Age</th>
+            <th>Position</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for player in defenders %}
+            <tr class="table-row">
+                <td class="small-td">{{ player.number }}</td>
+                <td class=""><a href="{% url 'player-detail' player.id %}">{{ player.name }}</a></td>
+                <td class="">{{ player.age }}</td>
+                <td class="">{{ player.position }}</td>
+                <td class="">€{{ player.value }} m</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <h2><b>Midfielders</b></h2>
+    <table class="detailed-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Player</th>
+            <th>Age</th>
+            <th>Position</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for player in midfielders %}
+            <tr class="table-row">
+                <td class="small-td">{{ player.number }}</td>
+                <td><a href="{% url 'player-detail' player.id %}">{{ player.name }}</a></td>
+                <td>{{ player.age }}</td>
+                <td>{{ player.position }}</td>
+                <td>€{{ player.value }} m</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <h2><b>Attackers</b></h2>
+    <table class="detailed-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Player</th>
+            <th>Age</th>
+            <th>Position</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for player in attackers %}
+            <tr class="table-row">
+                <td class="small-td">{{ player.number }}</td>
+                <td><a href="{% url 'player-detail' player.id %}">{{ player.name }}</a></td>
+                <td>{{ player.age }}</td>
+                <td>{{ player.position }}</td>
+                <td>€{{ player.value }} m</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock text %}

@@ -1,0 +1,76 @@
+{% extends 'blog/base.html' %}
+{% block text %}
+<title>My team</title>
+<div class="fantasy">
+<div class="content-section">
+    <div class="media-body">
+        <div class="center-title">
+          <h1 class="center-title">{{ team.name }}<img class="club-title-image team-logo" src="{{ team.logo.logo_url }}"><br></h1>
+          <h3 class="">{{ team.description }}</h3>
+        </div>
+        <div class="flex">
+        <div class="team-squad-on-pitch">
+          <img class="pitch-image" src="/media/pitch.jpg">
+            {% if goalkeeper %}
+              <a href="{% url 'player-detail' goalkeeper.id %}"><img class="pitch-player-image goalkeeper" src="{{ goalkeeper.image_url }}" title="{{ goalkeeper }}"></a>
+            {% endif %}
+            {% if left_back %}
+              <a href="{% url 'player-detail' left_back.id %}"><img class="pitch-player-image left-back" src="{{ left_back.image_url }}" title="{{ left_back }}"></a>
+            {% endif %}
+            {% if left_centre_back %}
+              <a href="{% url 'player-detail' left_centre_back.id %}"><img class="pitch-player-image left-centre-back" src="{{ left_centre_back.image_url }}" title="{{ left_centre_back }}"></a>
+            {% endif %}
+            {% if right_centre_back %}
+              <a href="{% url 'player-detail' right_centre_back.id %}"><img class="pitch-player-image right-centre-back" src="{{ right_centre_back.image_url }}" title="{{ right_centre_back }}"></a>
+            {% endif %}
+            {% if right_back %}
+              <a href="{% url 'player-detail' right_back.id %}"><img class="pitch-player-image right-back" src="{{ right_back.image_url }}" title="{{ right_back }}"></a>
+            {% endif %}
+            {% if defensive_midfield %}
+              <a href="{% url 'player-detail' defensive_midfield.id %}"><img class="pitch-player-image defensive-midfield" src="{{ defensive_midfield.image_url }}" title="{{ defensive_midfield }}"></a>
+            {% endif %}
+            {% if central_midfield %}
+              <a href="{% url 'player-detail' central_midfield.id %}"><img class="pitch-player-image central-midfield" src="{{ central_midfield.image_url }}" title="{{ central_midfield }}"></a>
+            {% endif %}
+            {% if attacking_midfield %}
+              <a href="{% url 'player-detail' attacking_midfield.id %}"><img class="pitch-player-image attacking-midfield" src="{{ attacking_midfield.image_url }}" title="{{ attacking_midfield }}"></a>
+            {% endif %}
+            {% if left_winger %}
+              <a href="{% url 'player-detail' left_winger.id %}"><img class="pitch-player-image left-winger" src="{{ left_winger.image_url }}" title="{{ left_winger }}"></a>
+            {% endif %}
+            {% if right_winger %}
+              <a href="{% url 'player-detail' right_winger.id %}"><img class="pitch-player-image right-winger" src="{{ right_winger.image_url }}" title="{{ right_winger }}"></a>
+            {% endif %}
+            {% if centre_forward %}
+              <a href="{% url 'player-detail' centre_forward.id %}"><img class="pitch-player-image centre-forward" src="{{ centre_forward.image_url }}" title="{{ centre_forward }}"></a>
+            {% endif %}
+        </div>
+        <table class="team-squad-table">
+        <tbody>
+          {% for player in players %}
+            <tr class="">
+                <td class="team-player-number">{{ player.number }}</td>
+                <td><a class="table-link" href="{% url 'player-detail' player.id %}">{{ player.name }}</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+        </table>
+        </div>
+        <h3 class="center-title team-owner">Manager: {{ user.username }}</h3>
+        {% if not team.completed %}
+            <p class="center-title">Average age: {{ age }} y.o</p>
+            <form method="POST">
+                {% csrf_token %}
+                <button class="yes-button">Enter to fantasy</button>
+            </form>
+        {% else %}
+            <div class="center-title">
+              <h1>{{ team.points }} fantasy points</h1>
+              <h1><b>Global Rank #{{ team.rank }}</b></h1>
+              <a href="{% url 'leaderboard' %}">Fantasy leaderboard</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+</div>
+{% endblock text %}

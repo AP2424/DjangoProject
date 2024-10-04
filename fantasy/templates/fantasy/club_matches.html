@@ -1,0 +1,33 @@
+{% extends 'blog/base.html' %}
+{% block text %}
+<title>{{ club }}</title>
+<div class="fantasy">
+<h1 class="basic-title">{{ club.name }}<img class="club-title-image" src="{{ club.logo_url }}"></h1>
+<div class="flex-button">
+  <button class="club-button inactive-button"><a href="{% url 'club-squad' club.name %}">Squad</a></button>
+  <button class="club-button active-button"><a href="">Results</a></button>
+  <button class="club-button inactive-button first-button"><a href="{% url 'club-stats' club.name %}">Stats</a></button>
+
+</div>
+    <table class="basic-table matches-table">
+      {% for match in matches %}
+        <tr>
+            <td colspan="3" class="match-time">{{ match.datetime }}</td>
+        </tr>
+        <tr>
+            <td class="match-home"><a href="{% url 'club-squad' match.home_club.name %}">{{ match.home_club }}</a></td>
+            <td class="match-score"><a href="{% url 'match' match.id %}">
+            {% if match.home_goals > match.away_goals %}
+              <span class="match-won">{{ match.home_goals }}</span> : <span class="match-lost">{{ match.away_goals }}</span>
+            {% elif match.home_goals < match.away_goals %}
+              <span class="match-lost">{{ match.home_goals }}</span> : <span class="match-won">{{ match.away_goals }}</span>
+            {% else %}
+              <span class="match-draw">{{ match.home_goals }}</span> : <span class="match-draw">{{ match.away_goals }}</span>
+            {% endif %}
+            </a></td>
+            <td class="match-away"><a href="{% url 'club-squad' match.away_club.name %}">{{ match.away_club }}</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock text %}

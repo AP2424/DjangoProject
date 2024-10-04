@@ -1,0 +1,41 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block text %}
+  <div class="fantasy">
+    <div class="content-section">
+        <div class="media">
+            <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+            <div class="media-body">
+                <h2 class="account-heading">{{ user.username }}</h2>
+                <div class="flex-button">
+                    <button class="club-button inactive-button first-button"><a class="table-link" href="{% url 'team' %}">My Team</a></button>
+                    <button class="club-button active-button"><a href="{% url 'messages' %}">Messages</a></button>
+                    <button class="club-button inactive-button"><a href="">Groups</a></button>
+                    <button class="club-button inactive-button first-button"><a href="">Personal Data</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-section">
+        <div class="flex">
+        <ul class="poll-list">
+            {% for enduser, message in chats %}
+            <li class="poll-list-item">
+            <div class="">
+                        <img src="{{ enduser.profile.image.url }}" class="contact-pic">
+                        <a href="{% url 'join-room' enduser.username %}"><span class="contact-name">{{ enduser.username }}</span></a>
+                        <span class="last-message">{{ message }}</span>
+            </div>
+            </li>
+            {% endfor %}
+        </ul>
+            <form method="POST">
+                {% csrf_token %}
+                <input class="search" name="query" type="text" style="margin-top: 50px" placeholder="Find users...">
+                <input type="submit" class="send-button" value="Search">
+            </form>
+    </div>
+  </div>
+  </div>
+{% endblock text %}

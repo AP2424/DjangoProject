@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+{% block text %}
+<title>24 Fantasy</title>
+<form method="POST">
+    {% csrf_token %}
+      <input name="query" type="text" placeholder="Search for a player...">
+      <input type="submit">
+</form>
+<div class="leagues-animation">
+    <ul class="leagues">
+    {% for league in leagues %}
+        <li>
+              <a href="{% url 'clubs' league.name %}" title="{{ league.name }}"><img class='league-image' src="{{ league.image.url }}"></a>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock text %}

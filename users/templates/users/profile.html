@@ -1,0 +1,36 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block text %}
+  <div class="fantasy">
+    <div class="content-section">
+        <div class="media">
+            <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+            <div class="media-body">
+                <h2 class="account-heading">{{ user.username }}</h2>
+                <div class="flex-button">
+                    <button class="club-button inactive-button first-button"><a class="table-link" href="{% url 'team' %}">My Team</a></button>
+                    <button class="club-button inactive-button"><a href="{% url 'messages' %}">Messages</a></button>
+                    <button class="club-button inactive-button"><a href="">Groups</a></button>
+                    <button class="club-button inactive-button first-button"><a href="">Personal Data</a></button>
+                </div>
+            </div>
+        </div>
+        Member of:
+                {% for fc in fanclubs %}
+                    <a href="{% url 'fanclub-main' fc.team.name %}">{{ fc.team.name }}</a> &nbsp
+                {% endfor %}
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Profile info</legend>
+                {{ u_form|crispy }}
+                {{ p_form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Update</button>
+            </div>
+        </form>
+    </div>
+  </div>
+{% endblock text %}

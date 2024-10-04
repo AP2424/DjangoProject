@@ -1,0 +1,24 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block text %}
+  <div class="fantasy">
+    <div class="content-section">
+        <div class="media">
+            <img class="rounded-circle account-img" src="{{ enduser.profile.image.url }}">
+            <div class="media-body">
+                <h2 class="account-heading">{{ enduser.username }}
+                <a href="{% url 'join-room' enduser.username %}"><img src="{% static 'messageicon.jpg' %}" class="article-img"
+                               style="margin-left: 100px"></a></h2>
+                <div class="flex-button">
+                    <button class="club-button inactive-button first-button"><a class="table-link" href="">Team</a></button>
+                </div>
+                Member of:
+                {% for fc in fanclubs %}
+                    <a href="{% url 'fanclub-main' fc.team.name %}"></a>,
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+  </div>
+{% endblock text %}

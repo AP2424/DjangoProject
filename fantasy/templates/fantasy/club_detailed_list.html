@@ -1,0 +1,65 @@
+{% extends 'blog/base.html' %}
+{% block text %}
+<title>{{ league }}</title>
+<h1 class="table-title"><img class="league-title-image" src="{{ league.image.url }}"></h1>
+<div class="fantasy">
+  <div class="flex-button">
+    <button class="club-button active-button"><a href="">Table</a></button>
+    <button class="club-button inactive-button"><a href="{% url 'league-matches' league.name %}">Fixtures</a></button>
+    <button class="club-button inactive-button"><a href="{% url 'league-statistics' league.name %}">Statistics</a></button><br>
+  </div>
+  <div class="flex-button">
+    <button class="selector-button inactive-selector"><a href="{% url 'clubs' league.name %}">Compact</a></button>
+    <button class="selector-button active-selector"><a href="">Detailed</a></button>
+  </div>
+    <div class="leaderboard">
+    <table class="detailed-table">
+        <thead>
+          <tr>
+            <th class="place-title">Place</th>
+            <th>Club</th>
+            <th>Wins</th>
+            <th>Draws</th>
+            <th>Losses</th>
+            <th>Goal Diff</th>
+            <th>Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for club, place in clubs %}
+            <tr class="table-row">
+                {% if place > last_survival_place %}
+                  <td class="team-place relegation-place">{{ place }}
+                {% elif place <= league.champions_league_places %}
+                  <td class="team-place champions-league-place">{{ place }}
+                {% elif place <= champions_europa %}
+                  <td class="team-place europa-league-place">{{ place }}
+                {% elif place <= all_cups_places %}
+                  <td class="team-place conference-league-place">{{ place }}
+                {% else %}
+                  <td class="team-place">{{ place }}
+                {% endif %}
+                {% if club.place_change > 0 %}
+                    <img class="table-arrow" src="/media/green_arrow.png">
+                {% elif club.place_change < 0 %}
+                    <img class="table-arrow" src="/media/red_arrow.png">
+                {% else %}
+                    <img class="table-h-arrow" src="/media/yellow_arrow.png">
+                {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'club-squad' club.name %}"><img class="article-svg" src="{{ club.logo_url }}"></a>
+                    <a href="{% url 'club-squad' club.name %}">{{ club.name }}</a>
+                </td>
+                <td>{{ club.wins }}</td>
+                <td>{{ club.draws }}</td>
+                <td>{{ club.losses }}</td>
+                <td>{{ club.scored }}-{{ club.conceded }}</td>
+                <td>{{ club.points }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</div>
+{% endblock text %}

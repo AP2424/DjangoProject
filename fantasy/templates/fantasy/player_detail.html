@@ -1,0 +1,43 @@
+{% extends 'blog/base.html' %}
+{% block text %}
+<title>{{ object.name }}</title>
+<div class="fantasy">
+<div class="player-detail">
+    <h1 class="list-group-item player-title">{{ object.name }} Overview</h1>
+    <div class="flex-league-stats">
+      <div>
+        <div class="player-info-cell">Born {{ object.birthdate }}</div>
+        <div class="player-info-cell">{{ object.age }} years old</div>
+        <div class="player-info-cell"><img class="article-svg" src="{{ object.club.logo_url }}"><a href="{% url 'club-squad' object.club %}">{{ object.club }}</a></div>
+        <div class="player-info-cell">{{ object.position }}</div>
+        <div class="player-info-cell"><img class="article-svg" src="{{ object.nation.flag_url }}">From {{ object.nation }}</div>
+        <div class="player-info-cell">Number {{ object.number }}</div>
+        <div class="player-info-cell">Transfermarkt value: {{ object.value }} millions €</div>
+      </div>
+      <div>
+        <div class="player-info-cell">Games played: {{ object.matches }}</div>
+        <div class="player-info-cell">{{ object.goals }} goals</div>
+        <div class="player-info-cell">{{ object.assists }} assists</div>
+        <div class="player-info-cell">{{ object.yellow_cards }} yellow cards</div>
+        <div class="player-info-cell">{{ object.second_yellow_cards }} second yellow cards</div>
+        <div class="player-info-cell">{{ object.red_cards }} red cards</div>
+      </div>
+      <div>
+        <img class="player-img" src="{{ object.image_url }}">
+        <form method="POST">
+          {% csrf_token %}
+          {% if not user.team.completed %}
+            {% if object in user.team.players.all%}
+              <button title="€{{ available }} m available" class="no-button mt-3" type="submit">Release</button>
+            {% else %}
+              <button title="€{{ available }} m available" class="yes-button mt-3" type="submit">Select</button>
+           {% endif %}
+          {% endif %}
+        </form>
+      </div>
+      </div>
+</div>
+
+</div>
+
+{% endblock text %}

@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %}
+{% block text %}
+<title>{{ club }}</title>
+<div class="fantasy">
+<h1 class="table-title"><img class="league-title-image" src="{{ league.image.url }}"></h1>
+  <div class="flex-button">
+    <button class="club-button inactive-button"><a href="{% url 'clubs' league.name %}">Table</a></button>
+    <button class="club-button inactive-button"><a href="{% url 'league-matches' league.name %}">Fixtures</a></button>
+    <button class="club-button inactive-button"><a href="{% url 'league-statistics' league.name %}">Statistics</a></button>
+    <button class="club-button active-button"><a href="#">Next Matchday</a></button><br>
+  </div>
+      {% for date, date_matches in matches %}
+            <b class="match-dates">{{ date }}</b>
+        <table class="basic-table matches-table">
+        {% for match in date_matches %}
+          <tr class="match-row">
+              <td class="match-home"><a href="{% url 'club-squad' match.home_club.name %}">{{ match.home_club }}</a><img class="article-svg" src="{{ match.home_club.logo_url }}"></td>
+              <td class="match-score"><a href="{% url 'match' match.id %}">{{ match.time }}</a></td>
+              <td class="match-away"><img class="article-svg" src="{{ match.away_club.logo_url }}"><a href="{% url 'club-squad' match.away_club.name %}">{{ match.away_club }}</a></td>
+          </tr>
+        {% endfor %}
+        </table>
+      {% endfor %}
+  </div>
+
+
+{% endblock text %}

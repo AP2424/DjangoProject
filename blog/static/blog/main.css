@@ -1,0 +1,728 @@
+body {
+  background: #fafafa;
+  color: #333333;
+  margin-top: 5rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #444444;
+  margin-bottom: 20px;
+}
+
+ul {
+  margin: 0px;
+}
+
+.bg-steel {
+  background-color: #5f788a;
+}
+
+.site-header .navbar-nav .nav-link {
+  color: #cbd5db;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: #ffffff;
+}
+
+.site-header .navbar-nav .nav-link.active {
+  font-weight: 500;
+}
+
+.content-section {
+  background: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #5f788a;
+  border-radius: 3px;
+  margin-bottom: 20px;}
+
+.article-title {
+  color: #444444;
+}
+
+a.article-title:hover {
+  color: #428bca;
+  text-decoration: none;
+}
+
+.article-content {
+  white-space: pre-line;
+}
+
+.article-img {
+  height: 65px;
+  width: 65px;
+  margin-right: 16px;
+}
+
+.article-metadata {
+  padding-bottom: 1px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #e3e3e3
+}
+
+.article-metadata a:hover {
+  color: #333;
+  text-decoration: none;
+}
+
+.article-svg {
+  width: 30px;
+  height: auto;
+  vertical-align: middle;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+.account-img {
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+
+.account-heading {
+  font-size: 2.5rem;
+}
+
+.block{
+display: block;}
+
+.inline{
+display: inline;}
+
+.flex{
+display: flex;
+column-gap: 83px;
+}
+
+.flex-button{
+display: flex;
+column-gap: 10px;
+justify-content: center;
+}
+
+.flex-league-stats{
+display: flex;
+column-gap: 50px;}
+
+.float-right{
+float: right;}
+
+.float-left{
+float: left;}
+
+.yes-button{
+background: rgb(60, 240, 150);
+border: 2px solid rgb(30, 80, 30);
+width: auto;
+height: 45px;
+font-size: 21px;
+border-radius: 10px;}
+
+.yes-button:hover{
+background: rgb(80, 180, 80);
+}
+
+.no-button{
+background: rgb(200, 100, 100);
+border: 2px solid rgb(80, 30, 30);
+width: 120px;
+height: 50px;
+font-size: 21px;
+border-radius: 10px;}
+
+.no-button:hover{
+background: rgb(180, 80, 80)}
+
+.fantasy{
+font-size: 17px;
+font-family: calibri;
+}
+
+.fantasy a{
+color: black;}
+
+.fantasy a:hover{
+color: rgb(20, 50, 130);}
+
+td, th{
+border: 2px solid rgb(155, 165, 175);
+padding-left: 15px;
+}
+
+.table-row:nth-child(even) {
+            background-color: rgb(190, 200, 215);}
+
+.table-row:nth-child(odd) {
+background-color: rgb(230, 240, 250);}
+
+.table-row{
+height: 47px;
+}
+
+th{
+background-color: rgb(150, 175, 190);
+font-size: 20px;
+height: 40px;
+}
+
+.player-detail{
+text-align: center;
+font-size: 20px;
+}
+
+.player-info-cell{
+background: rgb(220, 240, 240);
+padding: 15px;
+border-radius: 10px;
+border: 2px solid rgb(80, 130, 110);
+margin: 15px;}
+
+.player-title{
+border: 3px solid rgb(150, 175, 190);
+background: rgb(200, 210, 230);
+border-radius: 50px 50px 0px 0px !important;
+font-weight: bold;
+}
+
+.player-detail h2{
+border: 2px solid rgb(150, 175, 190);
+background: rgb(200, 210, 215);
+font-weight: bold;
+}
+
+.center-title{
+text-align: center}
+
+.basic-title{
+text-align: center;
+font-weight: bold;
+}
+
+.small-td{
+width: 50px;
+font-weight: bold;
+font-size: 20px;
+}
+
+.title-deco{
+border: 3px gold solid;}
+
+@keyframes example{
+from {margin-left: 1000px;}
+to {margin-right: 0px;}
+}
+
+.leagues-animation{
+animation-name: example;
+animation-duration: 0.5s;
+}
+
+.league-image{
+width: 100px;
+margin-bottom: 50px;
+padding-top: 50px;
+}
+
+.club-title-image{
+width: 80px;
+height: auto;
+margin-left: 30px;}
+
+.ball-image{
+width: 40px;
+height: auto;
+margin-left: 70px;}
+
+.league-title-image{
+width: 110px;
+height: auto;
+margin-bottom: 20px;}
+
+.team-place{
+font-weight: bold;
+font-size: 20px;
+width: 70px;
+text-align: left;
+padding-left: 15px;}
+
+.place-title{
+padding-left: 10px;}
+
+.champions-league-place{
+border-left: 4px solid blue;}
+
+.europa-league-place{
+border-left: 4px solid orange;}
+
+.conference-league-place{
+border-left: 4px solid green;}
+
+.relegation-place{
+border-left: 4px solid red;}
+
+.table-arrow{
+width: 13px;
+height: auto;
+vertical-align: middle;
+margin-bottom: 5px;
+}
+
+.table-h-arrow{
+height: 13px;
+width: auto;
+vertical-align: middle;
+margin-bottom: 5px;
+}
+
+.team-stats:hover, .squad-player:hover{
+background-color: rgb(150, 175, 190);}
+
+.leagues{
+display: grid;
+list-style: none;
+grid-template-columns: repeat(5, 1fr);
+grid-auto-rows: 250px;
+}
+
+.table-title{
+border-bottom: 2px grey dotted;
+text-align: center;
+margin-left: 250px;
+margin-right: 250px;
+padding-bottom: 10px;
+}
+
+.detailed-table{
+margin-left: auto;
+margin-right: auto;
+width: 100%;
+}
+
+.compact-table{
+width: 50%;}
+
+.club-button{
+width: 200px;
+height: 50px;
+border: 2px solid rgb(150, 175, 190);
+border-radius: 15px;
+font-size: 22px;
+margin-bottom: 30px;
+}
+
+.selector-button{
+width: 150px;
+height: 37px;
+border: 2px solid rgb(80, 130, 110);
+margin-top: 30px;
+margin-bottom: 20px;
+border-radius: 10px;
+}
+
+.active-selector{
+background: rgb(220, 240, 240);
+}
+
+.inactive-selector{
+background: rgb(150, 210, 160);}
+
+.inactive-selector:hover{
+background: rgb(80, 220, 110);}
+
+.inactive-button{
+background: rgb(115, 135, 160);
+}
+
+.inactive-button:hover{
+background: rgb(130, 160, 200);
+}
+.active-button{
+background: rgb(215, 225, 245);
+}
+
+.matches-table{
+margin-left: auto;
+margin-right: auto;
+margin-bottom: 50px;
+width: 80% !important;
+font-weight: bold;
+font-size: 25px;
+border-collapse: collapse;
+}
+
+.matches-table td{
+border: none;
+border-bottom: 1px dotted rgb(100, 100, 100);
+}
+
+.matches-table .match-time{
+border: none;
+width: 250px;
+font-size: 15px;
+text-align: center;
+height: 60px;
+vertical-align: bottom;
+}
+
+.matches-table a{
+color: rgb(70, 90, 120);
+}
+
+.match-row{
+height: 60px;}
+
+.match-dates{
+margin-top: 50px;}
+
+.match-home{
+width: 350px;
+text-align: right;
+}
+
+.match-away{
+width: 350px;
+}
+
+.match-time-sm{
+font-weight: 400;
+font-size: 18px;
+width: 90px;}
+
+.match-score{
+text-align: center;}
+
+.match-won{
+color: green;}
+
+.match-lost{
+color: red;}
+
+.match-draw{
+color: rgb(180, 170, 60);}
+
+.league-stats-table{
+margin-bottom: 30px;
+margin-top: 40px;
+margin-left: 50px;
+height: 230px;
+width: 430px;
+}
+
+.club-stats-table{
+width: 400px;
+margin-bottom: 30px;
+margin-top: 40px;
+margin-left: 50px;
+}
+
+.player-img{
+height: 350px;
+width: auto;
+margin-top: 30px;
+border-radius: 15px;}
+
+.team-titlebox{
+margin-right: 200px;}
+
+.team-logo{
+margin-left: 20px;}
+
+.team-owner{
+margin-top: 50px;}
+
+.team-squad-table{
+width: 30%;
+margin-top: 30px;
+margin-left: 50px;
+height: 100%;
+}
+
+.team-squad-table td{
+border: none;
+border-bottom: 1px solid rgb(80, 80, 150);
+height: 50px;
+text-align: center;
+}
+
+.pitch-image{
+height: 650px;
+margin-left: 40px;
+margin-bottom: 60px;
+position: relative;
+top: 30px;}
+
+.pitch-player-image{
+height: 60px;
+border-radius: 10px;
+position: absolute;
+}
+
+.team-player-number{
+font-weight: bold;
+font-size: 25px;
+}
+
+.goalkeeper{
+top: 765px;
+left: 275px;}
+
+.left-back{
+top: 650px;
+left: 105px;}
+
+.left-centre-back{
+top: 680px;
+left: 205px;}
+
+.right-centre-back{
+top: 680px;
+left: 345px;}
+
+.right-back{
+top: 650px;
+left: 445px;}
+
+.defensive-midfield{
+top: 570px;
+left: 275px;}
+
+.attacking-midfield{
+top: 455px;
+left: 345px;
+}
+
+.central-midfield{
+top: 455px;
+left: 205px;}
+
+.left-winger{
+top: 360px;
+left: 105px;}
+
+.right-winger{
+top: 360px;
+left: 445px;}
+
+.centre-forward{
+top: 300px;
+left: 275px;}
+
+.poll{
+
+}
+
+.poll-list{
+margin-top: 30px;
+font-weight: bold;
+font-size: 26px;
+width: 400px;
+list-style: none;
+}
+
+.poll-list-item{
+background: white;
+height: 70px;
+border: 1px solid rgb(150, 150, 180);
+border-radius: 10px;
+margin-top: 10px;
+line-height: 70px;
+padding-left: 20px;
+}
+
+.poll-image{
+width: 50px;
+float: right;
+margin-right: 20px;
+margin-top: 2px;
+border-radius: 10px;
+}
+
+.search{
+width: 250px;
+height: 40px;
+margin-right: 20px;
+}
+
+
+.chat-container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 30%;
+    background-color: #003366;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.profile-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.profile-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.contacts {
+    width: 100%;
+}
+
+.contact {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ffffff33;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.contact:hover {
+    background-color: #00509e;
+}
+
+.contact-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-name {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.last-message {
+    font-size: 12px;
+    color: #cccccc;
+}
+
+.chat-section {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+    border-left: 1px solid #cccccc;
+}
+
+.chat-header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: #00509e;
+    color: white;
+}
+
+.chat-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.chat-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    float: left;
+    max-width: 80%;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.message-sent-container {
+    align-self: flex-end;
+}
+
+.received {
+    align-self: flex-start;
+    background-color: #e1e1e1;
+}
+
+.message-lower {
+    display: block;
+}
+
+.sent {
+    background-color: #0066cc;
+    color: white;
+}
+
+.chat-input {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #cccccc;
+}
+
+.message-pic {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin: 10 10px;
+}
+
+.message-timestamp {
+    font-size: 10px;
+    align-self: flex-end;
+    margin-top: 5px;
+    opacity: 0.6;
+}
+
+#messageInput {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.send-button {
+    padding: 10px 20px;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.send-button:hover {
+    background-color: #004d99;
+}
+
+.mini-icon {
+    height: 15px;
+    width: 15px;
+}

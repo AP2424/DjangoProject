@@ -1,0 +1,148 @@
+{% extends 'blog/base.html' %}
+{% block text %}
+<title>{{ club }}</title>
+<div class="fantasy">
+<h1 class="table-title"><img class="league-title-image" src="{{ league.image.url }}"></h1>
+  <div class="flex-button">
+    <button class="club-button inactive-button"><a href="{% url 'clubs' league.name %}">Table</a></button>
+    <button class="club-button inactive-button"><a href="{% url 'league-matches' league.name %}">Fixtures</a></button>
+    <button class="club-button active-button"><a href="">Statistics</a></button><br>
+    <button class="club-button inactive-button"><a href="{% url 'league-next-matchday' league.name %}">Next Matchday</a></button><br>
+  </div>
+<div class="flex-league-stats">
+<table class="league-stats-table">
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th>Best goalscorers</th>
+      <th>Goals</th>
+    </tr>
+  </thead>
+  {% for scorer, rank in scorers %}
+    <tr class="table-row">
+      <td class="small-td">{{ rank }}</td>
+      <td><a href="{% url 'player-detail' scorer.id %}">{{ scorer }}</a></td>
+      <td>{{ scorer.goals }}</td>
+    </tr>
+  {% endfor %}
+</table>
+<table class="league-stats-table">
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th>Best assisters</th>
+      <th>Assists</th>
+    </tr>
+  </thead>
+  {% for assister, rank in assisters %}
+    <tr class="table-row">
+      <td class="small-td">{{ rank }}</td>
+      <td><a href="{% url 'player-detail' assister.id %}">{{ assister }}</a></td>
+      <td>{{ assister.assists }}</td>
+    </tr>
+  {% endfor %}
+</table>
+</div>
+<div class="flex-stats">
+<table class="league-stats-table">
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th>Most expensive players</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  {% for player, rank in exp_players %}
+    <tr class="table-row">
+      <td class="small-td">{{ rank }}</td>
+      <td><a href="{% url 'player-detail' player.id %}">{{ player }}</a></td>
+      <td>{{ player.value }} m. €</td>
+    </tr>
+  {% endfor %}
+</table>
+  <table class="league-stats-table">
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th>Youngest players</th>
+      <th>Birthdate</th>
+    </tr>
+  </thead>
+  {% for player, rank in youngest %}
+    <tr class="table-row">
+      <td class="small-td">{{ rank }}</td>
+      <td><a href="{% url 'player-detail' player.id %}">{{ player }}</a></td>
+      <td>{{ player.birthdate }}</td>
+    </tr>
+  {% endfor %}
+  </table>
+  </div>
+  <div class="flex-stats">
+  <table class="league-stats-table">
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th>Oldest players</th>
+      <th>Birthdate</th>
+    </tr>
+  </thead>
+  {% for player, rank in oldest %}
+    <tr class="table-row">
+      <td class="small-td">{{ rank }}</td>
+      <td><a href="{% url 'player-detail' player.id %}">{{ player }}</a></td>
+      <td>{{ player.birthdate }}</td>
+    </tr>
+  {% endfor %}
+  </table>
+  <table class="league-stats-table">
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th>Most yellow cards</th>
+      <th>Cards</th>
+    </tr>
+  </thead>
+  {% for player, rank in yellows %}
+    <tr class="table-row">
+      <td class="small-td">{{ rank }}</td>
+      <td><a href="{% url 'player-detail' player.id %}">{{ player }}</a></td>
+      <td>{{ player.yellow_cards }}</td>
+    </tr>
+  {% endfor %}
+  </table>
+  </div>
+  <div class="flex-stats">
+  <table class="league-stats-table">
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th>Most red cards</th>
+      <th>Cards</th>
+    </tr>
+  </thead>
+  {% for player, rank in reds %}
+    <tr class="table-row">
+      <td class="small-td">{{ rank }}</td>
+      <td><a href="{% url 'player-detail' player.id %}">{{ player }}</a></td>
+      <td>{{ player.red_cards }}</td>
+    </tr>
+  {% endfor %}
+  </table>
+  <table class="league-stats-table">
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th>Most fantasy points</th>
+      <th>Points</th>
+    </tr>
+  </thead>
+  {% for player, rank in points %}
+    <tr class="table-row">
+      <td class="small-td">{{ rank }}</td>
+      <td><a href="{% url 'player-detail' player.id %}">{{ player }}</a></td>
+      <td>{{ player.points }}</td>
+    </tr>
+  {% endfor %}
+  </table>
+</div>
+{% endblock text %}

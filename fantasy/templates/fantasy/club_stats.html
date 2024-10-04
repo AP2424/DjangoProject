@@ -1,0 +1,60 @@
+{% extends 'blog/base.html' %}
+{% block text %}
+<title>{{ club }}</title>
+<div class="fantasy">
+<h1 class="basic-title">{{ club.name }}<img class="club-title-image" src="{{ club.logo_url }}"></h1>
+<div class="flex-button">
+  <button class="club-button inactive-button"><a href="{% url 'club-squad' club.name %}">Squad</a></button>
+  <button class="club-button inactive-button"><a href="{% url 'club-matches' club.name %}">Fixtures</a></button>
+  <button class="club-button active-button"><a href="">Stats</a></button>
+</div>
+<div class="flex-button">
+<table class="club-stats-table">
+  <thead>
+    <tr>
+      <th>Best goalscorers</th>
+      <th>Goals</th>
+    </tr>
+  </thead>
+  {% for scorer in scorers %}
+    <tr class="table-row">
+      <td><a href="{% url 'player-detail' scorer.id %}">{{ scorer }}</a></td>
+        <td>{{ scorer.goals }}</td>
+    </tr>
+  {% endfor %}
+</table>
+<table class="league-stats-table">
+  <thead>
+    <tr>
+      <th>Best assisters</th>
+      <th>Assists</th>
+    </tr>
+  </thead>
+  {% for assister in assisters %}
+    <tr class="table-row">
+      <td><a href="{% url 'player-detail' assister.id %}">{{ assister }}</a></td>
+        <td>{{ assister.assists }}</td>
+    </tr>
+  {% endfor %}
+</table>
+<table class="league-stats-table">
+  <thead>
+    <tr>
+      <th>Most expensive players</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  {% for player in exp_players %}
+    <tr class="table-row">
+      <td><a href="{% url 'player-detail' player.id %}">{{ player }}</a></td>
+        <td>{{ player.value }} m. €</td>
+    </tr>
+  {% endfor %}
+</table>
+</div>
+{% for place in places %}
+  {{ place }},
+{% endfor %}
+
+</div>
+{% endblock text %}

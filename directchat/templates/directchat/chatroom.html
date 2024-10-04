@@ -1,0 +1,184 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Page</title>
+    <link rel="stylesheet" href="{% static 'directchat/styles.css' %}">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="sidebar">
+            <div class="profile-section">
+                <img src="{{ request.user.profile.image.url }}" alt="Profile Picture" class="profile-pic">
+                <span class="profile-name">{{ user.username }}</span>
+            </div>
+            <div class="contacts">
+                {% for enduser, message, activity in chats %}
+                <a href="{% url 'join-room' enduser.username %}"><div class="contact">
+                    <div class="image-container">
+                    <img src="{{ enduser.profile.image.url }}" alt="Contact 1" class="contact-pic">
+                    {% if activity == 'active' %}
+                    <img src="{% static 'activeicon.png' %}" class="active-icon">
+                    {% endif %}
+                    </div>
+                    <div class="contact-info">
+                        <span class="contact-name">{{ enduser.username }}</span>
+                        <span class="last-message">{{ message }}</span>
+                    </div>
+                </div></a>
+                {% endfor %}
+                <!-- Add more contacts as needed -->
+            </div>
+        </div>
+        <div class="chat-section">
+            <div class="chat-header">
+                <div class="image-container">
+                <img src="{{ enduser.profile.image.url }}" alt="Contact 1" class="chat-pic">
+                {% if activity == 'active' %}
+                <img src="{% static 'activeicon.png' %}" class="mini-icon active-icon">
+                {% endif %}</div>
+                <span class="chat-name">{{ enduser.username }}</span>
+            </div>
+            <div class="chat-messages">
+                {% for message in messages %}
+                  {% if message.author == user %}
+                <div class="message-sent-container" id="{{ message.id }}">
+                    <img class="mini-icon" src="{% static 'edit.png' %}" onclick="editMessage({{ message.id }})">
+                    <form method="POST">
+                          {% csrf_token %}
+                      <input name="delete" type="hidden" value="{{ message.id }}">
+                      <input type="image" src="{% static 'delete.png' %}" class="mini-icon">
+                    </form>
+                    <div class="message sent"><span>{{ message.text }}</span>
+                      <span class="message-timestamp">{{ message.timestamp|date:"H:i" }}</span></div>
+                    <img class="message-pic" src="{{ request.user.profile.image.url }}">
+                </div>
+                  {% else %}
+                    <div class="message-received-container" id="{{ message.id }}">
+                        <img class="message-pic" src="{{ enduser.profile.image.url }}">
+                        <div class="message received"><span>{{ message.text }}</span>
+                            <span class="message-timestamp">{{ message.timestamp|date:"H:i" }}</span></div>
+                   </div>
+                  {% endif %}
+                {% endfor %}
+                <!-- Add more messages as needed -->
+            </div>
+            <div class="chat-input">
+              <form id="form">
+                <input type="text" placeholder="Type a message..." id="messageInput" name="message">
+                <input type="hidden" value="0">
+                <button class="send-button">Send</button>
+              </form>
+            </div>
+        </div>
+    </div>
+    <!-- <script src="script.js"></script> -->
+<script type="text/javascript">
+              let url = `ws://${window.location.host}/ws/chat/{{ room_name }}/`
+              const chatSocket = new WebSocket(url)
+              chatSocket.onmessage = function(e){
+                   let data = JSON.parse(e.data)
+                   console.log('Data:', data)
+                   if(data.type === 'chat' && data.editedMessageID == 0) {
+                       const messageContainer = document.createElement('div')
+                       const message = document.createElement('div')
+                       const messagePic = document.createElement('img')
+                       const messageText = document.createElement('span')
+                       const messageTimestamp = document.createElement('span')
+                       messageContainer.id = data.messageID
+                       messagePic.className = 'message-pic'
+                       messageTimestamp.className = 'message-timestamp'
+                       const now = new Date()
+                       const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                       messageTimestamp.textContent = timeString
+                       if (`{{ user.username }}` === data.author) {
+                           messageContainer.className = 'message-sent-container'
+                           message.className = 'message sent'
+                           messagePic.src = `{{ request.user.profile.image.url }}`
+                           const editButton = document.createElement('img')
+                           editButton.src = `{% static 'edit.png' %}`
+                           editButton.className = 'mini-icon'
+                           editButton.onclick = function() {editMessage(data.messageID)}
+                           const deleteForm = document.createElement('form')
+                           deleteForm.method = 'POST'
+                           csrfInput = document.createElement('input')
+                           csrfInput.type = 'hidden'
+                           csrfInput.name = 'csrfmiddlewaretoken'
+                           csrfInput.value = 'S7EhxXgbFPyxLmk7yChXiNatGnnSRbxCU1fVoaYWGDFozXbm9eoXxgNz7e5ltZEp'
+                           hiddenInput = document.createElement('input')
+                           hiddenInput.name = 'delete'
+                           hiddenInput.type = 'hidden'
+                           hiddenInput.value = data.messageID
+                           const deleteInput = document.createElement('input')
+                           deleteInput.type = 'image'
+                           deleteInput.src = `{% static 'delete.png' %}`
+                           deleteInput.className = 'mini-icon'
+
+                           messageContainer.appendChild(editButton)
+                           messageContainer.appendChild(deleteForm)
+                           deleteForm.appendChild(csrfInput)
+                           deleteForm.appendChild(hiddenInput)
+                           deleteForm.appendChild(deleteInput)
+                           messageContainer.appendChild(message)
+                           messageContainer.appendChild(messagePic)
+                       } else {
+                           messageContainer.className = 'message-received-container'
+                           message.className = 'message received'
+                           messagePic.src = `{{ enduser.profile.image.url }}`
+                           messageContainer.appendChild(messagePic)
+                           messageContainer.appendChild(message)
+                       }
+                       messageText.textContent = data.message
+                       document.querySelector('.chat-messages').appendChild(messageContainer)
+                       message.appendChild(messageText)
+                       message.appendChild(messageTimestamp)
+                       document.querySelector('.chat-messages').scrollTop = document.querySelector('.chat-messages').scrollHeight
+
+                   }
+                   else if (data.type === 'chat' && data.editedMessageID !== 0) {
+                       const messageElement = document.getElementById(data.editedMessageID)
+                       let span = messageElement.querySelector('span')
+                       span.textContent = data.message
+                       let form = document.getElementById('form')
+                       form.children[1].value = 0
+                       messageElement.style.backgroundColor = "white"
+
+                   }
+
+              }
+              let form = document.getElementById('form')
+              form.addEventListener('submit', (e)=> {
+                  e.preventDefault()
+                  let message = e.target.message.value
+                  if (message !== '') {
+                      let author = `{{ user.username }}`
+                      edited = form.children[1].value
+                      chatSocket.send(JSON.stringify({
+                          'type': 'create',
+                          'message': message,
+                          'author': author,
+                          'editedMessageID': edited
+                  }))
+                  }
+                  form.reset()
+              })
+
+              function editMessage(messageID) {
+                  const messageElement = document.getElementById(messageID)
+                  let span = messageElement.querySelector('span')
+                  let text = span.innerText
+                  let form = document.getElementById('form')
+                  form.children[0].value = text
+                  form.children[1].value = messageID
+                  messageElement.style.backgroundColor = "lightblue"
+              }
+
+
+
+
+
+
+</script>
+</body>
+</html>
